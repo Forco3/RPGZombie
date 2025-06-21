@@ -11,7 +11,7 @@ public class WeaponEffects : MonoBehaviour
     public AudioClip weaponClip;
     public ParticleSystem weaponParticleSystem;
     [Range(0.1f, 1)]
-    [SerializeField]private float interval = 0.5f;
+    [SerializeField]private float interval = 0.2f;
     private float nextTime;
     private void Awake()
     {
