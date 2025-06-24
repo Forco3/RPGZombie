@@ -7,7 +7,7 @@ using TMPro;
 
 public class ItemInSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler 
 {
-    private CharacterState charSt;
+    private CharacterHP charSt;
     private Canvas canvas;
     private RectTransform rectTransform; //RectTransform- необходим для UI 2d объектов
     private Transform originalParent; //Компонент Transform у родителя (Slot)
@@ -26,7 +26,7 @@ public class ItemInSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         canvasGroup = GetComponent<CanvasGroup>();
         imageItem = GetComponent<Image>();
         textItem = GetComponentInChildren<TextMeshProUGUI>();
-        charSt = FindObjectOfType<CharacterState>();
+        charSt = FindObjectOfType<CharacterHP>();
         
     }
     public void SetDataItem(Item newItemData)

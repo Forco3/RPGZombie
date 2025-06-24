@@ -1,19 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MutantHP : EnemyHP
+public class MutantHP : HitPointsBase
 {
-    public override void TakeDamageEnemy(float damage)
+    public override event Action onDeadPlayAudio;
+
+    public override void OnTakeDamagePlayAudioDeadEvent()
     {
-        if (currentHP <= 0)
-        {
-            anim.SetTrigger("DeathTrigger");
-            InactiveZombie(false);
-        }
-        else
-        {
-            currentHP -= damage / ignoreDamage;
-        }
-    }
+        onDeadPlayAudio?.Invoke();
+    }  
 }

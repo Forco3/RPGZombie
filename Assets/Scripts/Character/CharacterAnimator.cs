@@ -6,14 +6,14 @@ using UnityEngine;
 public class CharacterAnimator : MonoBehaviour
 {
     private Animator animator;
-    private CharacterState state;
+    private CharacterHP state;
 
     private float speedAnim = 0.5f;
     public float smoothToggleAnim = 0.2f;
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        state = FindObjectOfType<CharacterState>();
+        state = FindObjectOfType<CharacterHP>();
     }
     private void Update()
     {

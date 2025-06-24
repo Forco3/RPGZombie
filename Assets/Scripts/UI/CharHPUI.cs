@@ -6,12 +6,12 @@ using TMPro;
 
 public class CharHPUI : MonoBehaviour
 {
-    private CharacterState characterState;
+    private CharacterHP characterState;
     private Image imageHP;
     private TextMeshProUGUI textHP;
     private void Awake()
     {
-        characterState = FindObjectOfType<CharacterState>();
+        characterState = FindObjectOfType<CharacterHP>();
         imageHP = GetComponentInChildren<Image>();
         textHP = GetComponentInChildren<TextMeshProUGUI>();
     }

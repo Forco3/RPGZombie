@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro.Examples;
 using UnityEngine;
 
-public class CharacterState : MonoBehaviour
+public class CharacterHP : MonoBehaviour
 {
     private float currentHP = 100;
     public bool isReadyForBattle { get; private set; } //свойства должны быть публичными

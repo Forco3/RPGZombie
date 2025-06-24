@@ -1,7 +1,5 @@
-using UnityEngine;
-
-public class ZombieAudio : AudioVoisBase
-{    
+public class MutantAudio : AudioVoisBase
+{
     private void OnEnable()
     {
         move.onScreamerPlayAudio += ScreamerAudioZ;
@@ -13,5 +11,5 @@ public class ZombieAudio : AudioVoisBase
         move.onScreamerPlayAudio -= ScreamerAudioZ;
         hp.onDeadPlayAudio -= DeathAudioZ;
         randomMove.onIdlePlayAudio -= IdleAudioZ;
-    } 
+    }
 }

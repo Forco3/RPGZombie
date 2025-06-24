@@ -2553,12 +2553,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 734537056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b612db24690449941a08640006168b93, type: 3}
+  m_Script: {fileID: 11500000, guid: e608714251822a84f9c9ee46a394545c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleSource: {fileID: 2069689678}
-  screamerSource: {fileID: 954811114}
-  deathSource: {fileID: 260261127}
 --- !u!1 &738815485 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3135921509060577837, guid: 583f65a4868aab145b2be0532639f3a4, type: 3}
@@ -3457,7 +3454,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1147020637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5385,7 +5382,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c35f7c3b72e039048a2c84963f5a844d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c35f7c3b72e039048a2c84963f5a844d, type: 3}
       propertyPath: m_TagString
@@ -5456,8 +5453,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8304ba478a30045afb7199d4cbed6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHP: 100
-  ignoreDamage: 10
+  <currentHP>k__BackingField: 100
+  <ignoreDamage>k__BackingField: 1
 --- !u!114 &1804184135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5470,14 +5467,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b294bd3ea857304197a5092ddb9410e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomTimer: 5
-  minValloueTime: 3
-  maxValloueTime: 6
-  isRandomRotate: 1
+  direction: {x: 0, y: 0, z: 0, w: 0}
+  isRandomRotate: 0
   isRandomMove: 0
-  minAngle: 30
-  maxAngle: 180
-  timeIdle: 5
 --- !u!114 &1804184136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5490,20 +5482,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d4db5cc6afe764fb8ccd5973fc714e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedFollow: 8.5
-  speedRotate: 2
   distance: 0
-  minDistanceFollowTarget: 20
-  minDistanceLookTarget: 25
-  minDistanceDefaultAttackTarget: 3.5
   isIdle: 1
   isScreamer: 1
   isLookTarget: 0
   isFollowTarget: 0
   isMinDistanceDefaultAttack: 0
-  minDistancePunchAttackTarget: 2
-  minDistanceJumpAttackTarget: 5
-  isMinDistancePunchAttack: 1
+  isMinDistancePunchAttack: 0
   isMinDistanceJumpAttack: 0
 --- !u!65 &1804184137
 BoxCollider:
@@ -5570,7 +5555,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db1c51ee567d6de488c75650706495db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animZ: {fileID: 1804184149}
 --- !u!114 &1804184145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5656,16 +5640,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  isTakePerson: 0
-  trMutantHand: {fileID: 1526963014}
   damageMutant: 15
   punchDamage: 10
   jumpDamage: 25
---- !u!95 &1804184149 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: c35f7c3b72e039048a2c84963f5a844d, type: 3}
-  m_PrefabInstance: {fileID: 1804184132}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1814683598
 GameObject:
   m_ObjectHideFlags: 0

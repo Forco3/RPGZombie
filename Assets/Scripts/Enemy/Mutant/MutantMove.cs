@@ -1,36 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
-public class MutantMove : EnemyMove
+public class MutantMove :MoveBase
 {
-    public float minDistancePunchAttackTarget = 2;
-    public float minDistanceJumpAttackTarget = 4;
-
-    public bool isMinDistancePunchAttack = false;
-    public bool isMinDistanceJumpAttack = false;
-
+    public override event Action onScreamPlayAnim;
+    public override event Action onScreamerPlayAudio;
+     
     private void FixedUpdate()
     {
         if (isMinDistanceDefaultAttack || isMinDistancePunchAttack || isMinDistanceJumpAttack) return;
         LookTarget();
         FollowTarget();
-    }
-    private void Update()
+    } 
+    public override void OnScreamPlayAnimEvent()
     {
-        isMinDistancePunchAttack = IsMinDistance(minDistancePunchAttackTarget);
-        isMinDistanceJumpAttack = IsMinDistance(minDistanceJumpAttackTarget);
+        onScreamPlayAnim?.Invoke();
     }
-    public override void LookTarget()
+    public override void OnScreamPlayAudioEvent()
     {
-        base.LookTarget();
-    }
-    public override void FollowTarget()
-    {
-        base.FollowTarget();
-    }
-    public override bool IsMinDistance(float minDistance)
-    {
-        return base.IsMinDistance(minDistance);
+        onScreamerPlayAudio?.Invoke();
     }
 }

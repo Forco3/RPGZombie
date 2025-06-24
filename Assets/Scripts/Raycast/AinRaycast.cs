@@ -6,7 +6,7 @@ using UnityEngine;
 public class AimRaycast : MonoBehaviour
 {
     private WeaponHan handler;
-    private CharacterState state;
+    private CharacterHP state;
     private CameraCharacter myCamera;
     public Transform rayPoint;
     private Ray ray;
@@ -19,7 +19,7 @@ public class AimRaycast : MonoBehaviour
     private void Awake()
     {
         handler = FindObjectOfType<WeaponHan>();
-        state = FindObjectOfType<CharacterState>();
+        state = FindObjectOfType<CharacterHP>();
         myCamera = GetComponent<CameraCharacter>();
     }
     private void Update()

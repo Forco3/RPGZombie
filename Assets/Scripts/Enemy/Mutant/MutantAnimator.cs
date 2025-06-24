@@ -1,30 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class MutantAnimator : EnemyAnimator
-{
-    private MutantAttack attackMutant;
-    private void Awake()
-    {
-        attackMutant = GetComponent<MutantAttack>();
-    }
+public class MutantAnimator : AnimBase
+{  
     private void OnEnable()
     {
-        attackMutant.onAttack += DefaultAttackAnim;
-        attackMutant.onPunchAttack += PunchAnimAttack;
-        attackMutant.onJumpAttack += JumpAnimAttack;
-        attackMutant.onTakeAttackPerson += TakePersonHand;
+        move.onScreamPlayAnim += ScrimerAnim;
+        attack.onDefaultAttackPlayAnim += DefaultAttackAnim;
+        attack.onPunchAttackPlayAnim += PunchAnimAttack;
+        attack.onJumpAttackPlayAnim += JumpAnimAttack;
+        //attack.onTakeAttackPersonPlayAnim += TakePersonHand;
     }
     private void OnDisable()
     {
-        attackMutant.onAttack -= DefaultAttackAnim;
-        attackMutant.onPunchAttack -= PunchAnimAttack;
-        attackMutant.onJumpAttack -= JumpAnimAttack;
-        attackMutant.onTakeAttackPerson -= TakePersonHand;
+        move.onScreamPlayAnim -= ScrimerAnim;
+        attack.onDefaultAttackPlayAnim -= DefaultAttackAnim;
+        attack.onPunchAttackPlayAnim -= PunchAnimAttack;
+        attack.onJumpAttackPlayAnim -= JumpAnimAttack;
+        //attack.onTakeAttackPersonPlayAnim -= TakePersonHand;
     }
-    private void TakePersonHand()
-    {
-        animZ.SetTrigger("TakePersonTrigger");
-    }
+    //private void TakePersonHand()
+    //{
+    //    animator.SetTrigger("TakePersonTrigger");
+    //}
 }

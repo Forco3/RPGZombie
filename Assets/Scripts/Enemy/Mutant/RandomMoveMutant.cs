@@ -1,14 +1,13 @@
 using System;
 
-public class EnemyRandomBehavior : RandomMoveBase
-{  
+public class RandomMoveMutant : RandomMoveBase
+{
     public override event Action onIdlePlayAudio;
- 
     private void FixedUpdate()
     {
         isRandomMove = !move.isIdle && !move.isFollowTarget;
         isRandomRotate = !move.isLookTarget;
-        if (move.isMinDistanceDefaultAttack) return;
+        if (move.isMinDistanceDefaultAttack || move.isMinDistanceJumpAttack || move.isMinDistancePunchAttack) return;
         RandomMove();
         RandomRotate();
     }
