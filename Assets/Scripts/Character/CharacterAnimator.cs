@@ -17,17 +17,17 @@ public class CharacterAnimator : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && state.isReadyForBattle)
+        if (Input.GetKeyDown(KeyCode.T) && state.isHasWeapon)
         {
-            ReadyForBattleAnim(true);
+            ReadyForBattleAnim(state.isHasWeapon);
         }
-        if (Input.GetMouseButton(1) && state.isReadyForBattle)
+        if (Input.GetMouseButton(1) && state.isHasWeapon)
         {
             ReadyForBattleAnim(false);
             AimingAnim(true);
             Debug.Log("RightMouseButtonDown");
         }
-        else if (Input.GetMouseButtonUp(1) && state.isReadyForBattle)
+        else if (Input.GetMouseButtonUp(1) && state.isHasWeapon)
         {
             AimingAnim(false);
             ReadyForBattleAnim(true);

@@ -6,7 +6,7 @@ using UnityEngine;
 public class CharacterHP : MonoBehaviour
 {
     private float currentHP = 100;
-    public bool isReadyForBattle { get; private set; } //свойства должны быть публичными
+    public bool isHasWeapon { get; private set; } //свойства должны быть публичными
 
     private void Update()
     {
@@ -16,9 +16,9 @@ public class CharacterHP : MonoBehaviour
     {
         Time.timeScale = 1;
     }
-    public void SetStateReadyForBattle(bool isReadyForBattle)
+    public void IsHasWeapon(bool isHasWeapon)
     {
-        this.isReadyForBattle = isReadyForBattle;
+        this.isHasWeapon = isHasWeapon;
     }
     public void Hilling(float hill, Item dataItem)
     {

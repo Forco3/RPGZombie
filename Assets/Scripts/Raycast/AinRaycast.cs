@@ -42,7 +42,7 @@ public class AimRaycast : MonoBehaviour
             if (pickItem.IsWeapon())
             {
               handler.isPickUpWeapon = handler.SetParent(hit.collider.gameObject);
-                state.SetStateReadyForBattle(handler.isPickUpWeapon); 
+                state.IsHasWeapon(handler.isPickUpWeapon); 
             }
             else
             {
