@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PickUpItem : MonoBehaviour
@@ -27,7 +24,7 @@ public class PickUpItem : MonoBehaviour
     }
     public bool IsWeapon()
     {
-        if (itemData.nameItem == "M16")
+        if (itemData.itemType == ItemType.Weapon)
         {
             return true;
         }

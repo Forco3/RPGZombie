@@ -1,25 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro.Examples;
 using UnityEngine;
 
 public class CharacterHP : MonoBehaviour
 {
     private float currentHP = 100;
-    public bool isHasWeapon { get; private set; } //свойства должны быть публичными
+    
 
-    private void Update()
-    {
-        
-    }
+     
     private void OnEnable()
     {
         Time.timeScale = 1;
     }
-    public void IsHasWeapon(bool isHasWeapon)
-    {
-        this.isHasWeapon = isHasWeapon;
-    }
+ 
     public void Hilling(float hill, Item dataItem)
     {
         if (dataItem.nameItem == "Medical")

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameItem: Medical
   spriteItem: {fileID: 21300000, guid: bb8b8234141928147bb63f77e56c23af, type: 3}
+  itemType: 2

@@ -1,12 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponHan : MonoBehaviour
 {
-    private Transform targetWeapon;
-    public bool isPickUpWeapon { set; get; }
+    private Transform targetWeapon; 
     private void Awake()
     {
         targetWeapon = GetComponent<Transform>();

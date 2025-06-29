@@ -1,13 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AimRaycast : MonoBehaviour
 {
-    private WeaponHan handler;
-    private CharacterHP state;
-    private CameraCharacter myCamera;
+    private InputActions input;
+    private WeaponHan weapon;  
     public Transform rayPoint;
     private Ray ray;
     private RaycastHit hit;
@@ -17,50 +13,53 @@ public class AimRaycast : MonoBehaviour
     private float rayDistEnemyHit = 1000;
     public float damage = 20;
     private void Awake()
-    {
-        handler = FindObjectOfType<WeaponHan>();
-        state = FindObjectOfType<CharacterHP>();
-        myCamera = GetComponent<CameraCharacter>();
+    { 
+        weapon = FindObjectOfType<WeaponHan>();
+        input = FindObjectOfType<InputActions>();
     }
-    private void Update()
+    private void OnEnable()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            PickUpItem();
-        }
-        if (Input.GetMouseButtonDown(0) && handler.isPickUpWeapon)
-        {
-            HitEnemy();
-        }
+        input.onRaycastHitPickUpItem += RaycastHitPickUpItem;
+        input.onRaycastHitEnemy += RaycastHitEnemy;
     }
-    private void PickUpItem()
+    private void OnDisable()
+    {
+        input.onRaycastHitPickUpItem -= RaycastHitPickUpItem;
+        input.onRaycastHitEnemy -= RaycastHitEnemy;
+    }
+ 
+    private bool RaycastHitPickUpItem()
     {
         GetRay();
-        if(Physics.Raycast(ray, out hit, rayDistance, layerMaskItem))
+        if (Physics.Raycast(ray, out hit, rayDistance, layerMaskItem))
         {
             PickUpItem pickItem = hit.collider.GetComponent<PickUpItem>();
             if (pickItem.IsWeapon())
             {
-              handler.isPickUpWeapon = handler.SetParent(hit.collider.gameObject);
-                state.IsHasWeapon(handler.isPickUpWeapon); 
+                return weapon.SetParent(hit.collider.gameObject);
             }
             else
             {
                 pickItem.Interected();
+                return false;
             }
         }
+        else return false;
     }
-    private void GetRay()
-    {
-        ray = new Ray(rayPoint.position, rayPoint.forward);
-    }
-    private void HitEnemy()
+    
+    private bool RaycastHitEnemy()
     {
         GetRay();
         if (Physics.Raycast(ray, out hit, rayDistEnemyHit, layerMaskEnemy))
         {
-            EnemyHP hpEnemy = hit.collider.GetComponent<EnemyHP>();
+            EnemyHP hpEnemy = hit.collider?.GetComponent<EnemyHP>();
             hpEnemy?.TakeDamageEnemy(20);
+            return true;
         }
+        else return false;
+    }
+    private void GetRay()
+    {
+        ray = new Ray(rayPoint.position, rayPoint.forward);
     }
 }

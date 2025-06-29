@@ -1,49 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro.Examples;
 using UnityEngine;
 
 public class CharacterAnimator : MonoBehaviour
 {
+    private StateCharacter state;
     private Animator animator;
-    private CharacterHP state;
-
+     
     private float speedAnim = 0.5f;
     public float smoothToggleAnim = 0.2f;
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        state = FindObjectOfType<CharacterHP>();
+        state = FindObjectOfType<StateCharacter>();
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T) && state.isHasWeapon)
-        {
-            ReadyForBattleAnim(state.isHasWeapon);
-        }
-        if (Input.GetMouseButton(1) && state.isHasWeapon)
-        {
-            ReadyForBattleAnim(false);
-            AimingAnim(true);
-            Debug.Log("RightMouseButtonDown");
-        }
-        else if (Input.GetMouseButtonUp(1) && state.isHasWeapon)
-        {
-            AimingAnim(false);
-            ReadyForBattleAnim(true);
-        }
-        
+        bool isJump = state.isCollisitonTerrain && state.isKeyDownJump;
+        JumpAnim(isJump);
+    }
+    private void FixedUpdate()
+    {
+        MoveAnim(state.inputAxis);
+        ReadyForBattleAnim(state.isReadyForBattle);
+        AimingAnim(state.isAiming);
+        CharacterCrouchAnim(state.isCrouchimg);
     }
     public void JumpAnim(bool isKeyDownJump)
     {
-        if (isKeyDownJump)
-        {
-            animator.SetBool("IsJumping", true);
-        }
-        else
-        {
-            animator.SetBool("IsJumping", false);
-        } 
+        animator.SetBool("IsJumping", isKeyDownJump);
     }
     public void MoveAnim(Vector3 inputAxis) //inputAxis- переменная с типом данных Vector3
     {
@@ -59,10 +42,21 @@ public class CharacterAnimator : MonoBehaviour
             animator.SetFloat("Vertical", 0, smoothToggleAnim, Time.deltaTime);
         }
     }
-    public void CharacterCrouchAnim()
+    public void CharacterCrouchAnim(bool isCrouching)
     {
+        if(isCrouching)
         animator.SetTrigger("CrouchTrigger");
     }
+    
+    private void ReadyForBattleAnim(bool IsReadyForBattle)
+    {
+        animator.SetBool("IsReadyForBattle", IsReadyForBattle); 
+    }
+    public void AimingAnim(bool isAim)
+    {
+        animator.SetBool("IsAiming", isAim); 
+    }
+
     public void TurnAnimation(Vector3 mouseDelta)
     {
         if (Mathf.Abs(mouseDelta.x) > 0)
@@ -76,15 +70,5 @@ public class CharacterAnimator : MonoBehaviour
         {
             animator.SetFloat("MouseDelta", 0, smoothToggleAnim, Time.deltaTime);
         }
-    }
-    private void ReadyForBattleAnim(bool IsReadyForBattle)
-    {
-        animator.SetBool("IsReadyForBattle", IsReadyForBattle);
-        Debug.Log("Battle" + IsReadyForBattle); 
-    }
-    public void AimingAnim(bool isAim)
-    {
-        animator.SetBool("IsAiming", isAim);
-        Debug.Log("Aiming  " + isAim);
     }
 }

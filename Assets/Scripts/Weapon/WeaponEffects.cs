@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponEffects : MonoBehaviour
 {
-    private WeaponHan weaponHandler;
+    private StateCharacter state;
 
     private AudioSource weaponSource;
     [Header("Audio and ParticleEffects")]
@@ -16,11 +14,11 @@ public class WeaponEffects : MonoBehaviour
     private void Awake()
     {
         weaponSource = GetComponent<AudioSource>();
-        weaponHandler = FindObjectOfType<WeaponHan>();
+        state = FindObjectOfType<StateCharacter>();
     }
     private void Update()
     {
-        if (Time.time > nextTime && Input.GetMouseButton(0) && weaponHandler.isPickUpWeapon) 
+        if (Time.time > nextTime && state.isFire) 
         {
             nextTime = Time.time + interval;
             PlayShootingAudio(true);

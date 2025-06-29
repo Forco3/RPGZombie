@@ -1,37 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
+[RequireComponent(typeof(StateCharacter))]
 public class CharacterRigIK : MonoBehaviour
 {
-    private WeaponHan weaponHandler;
+    private StateCharacter state;
 
     public Rig weaponSlotSpineWeight;
-    public Rig weaponSlotAimWeight;
-
-    public bool isReadyForBattle = false;
+    public Rig weaponSlotReadyForBattle;
+    public Rig weaponSlotAimWeight; 
+   
     private void Awake()
     {
-        weaponHandler = GetComponentInChildren<WeaponHan>();
+        state = GetComponentInChildren<StateCharacter>();
     }
     private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            isReadyForBattle = !isReadyForBattle;
-        }
-        WeaponSlotSpine(weaponHandler.isPickUpWeapon, isReadyForBattle);
+    { 
+        WeaponSlotSpine(state.isHasWeapon);
+        WeaponSlotReadyForBattle(state.isHasWeapon, state.isReadyForBattle);
+        WeaponSlotAim(state.isHasWeapon, state.isReadyForBattle, state.isAiming);
     }
-    private void WeaponSlotSpine(bool isHasWeapon, bool isReadyForBattle)
+    private void WeaponSlotSpine(bool isHasWeapon)
+    {
+        weaponSlotSpineWeight.weight = isHasWeapon ? 1 : 0;
+    }
+
+    private void WeaponSlotReadyForBattle(bool isHasWeapon, bool isReadyForBattle)
     {
         if (isHasWeapon)
         {
-            weaponSlotSpineWeight.weight = isReadyForBattle ? 1 : 0;
-        }
-        Debug.Log("IsHasWeapon = " + isHasWeapon);
-        Debug.Log("IsReadyForBattle = " + isReadyForBattle);
+            weaponSlotReadyForBattle.weight = isReadyForBattle ? 1 : 0;
+        }   
     }
+  
     private void WeaponSlotAim(bool isHasWeapon, bool isReadyForBattle, bool isAimWeapon)
     {
         if (isHasWeapon && isReadyForBattle)

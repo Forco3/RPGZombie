@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveChar : MonoBehaviour
 {
-    private CameraCharacter cameraChar;
-    private CharacterAnimator characterAnim;
+    private StateCharacter state;
+    private CameraCharacter cameraChar; 
 
     private Rigidbody rbPerson;
 
@@ -18,38 +16,25 @@ public class MoveChar : MonoBehaviour
     public float speedRotate = 45;
     public float jumpForce = 3;
     public float sprint = 10;
-    public float currentSpeed;
-    private bool isTerrain;
+    public float currentSpeed; 
     private void Awake()
     {
+        state = GetComponent<StateCharacter>();
         rbPerson = GetComponent<Rigidbody>();
-        cameraChar = FindObjectOfType<CameraCharacter>();
-        characterAnim = GetComponent<CharacterAnimator>();
+        cameraChar = FindObjectOfType<CameraCharacter>(); 
     }
     private void FixedUpdate()
-    {
-        Vector3 inputAxis = InputAxis();
-        SetDirrection(inputAxis);
-        characterAnim.MoveAnim(inputAxis);
+    { 
+        SetDirrection(state.inputAxis); 
         Moving(newDirection);
         Rotating(cameraChar);
     }
     private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            characterAnim.CharacterCrouchAnim();
-        }
-        Jumping();
-        
+    { 
+        Jumping(state.isKeyDownJump); 
     }
 
-    private Vector3 InputAxis()
-    {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-        return new Vector3 (x, 0, z);  
-    }
+   
     private void SetDirrection(Vector3 inputAxis) //указываем направление, в котором должен двигаться объект
     {
         forward = Vector3.ProjectOnPlane(cameraChar.transform.forward, Vector3.up); //указываем направление движения вперёд относительно камеры
@@ -68,28 +53,20 @@ public class MoveChar : MonoBehaviour
         rbPerson.MovePosition(rbPerson.position + vector3 * currentSpeed * Time.deltaTime);
         
     }
-    private void Jumping()
+    private void Jumping(bool isKeyDownJump)
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isTerrain) 
+        if (isKeyDownJump && state.isCollisitonTerrain) 
         {
-            rbPerson.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            characterAnim.JumpAnim(true); 
-        }
-        else characterAnim.JumpAnim(false);
+            rbPerson.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); 
+        } 
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Terrain") 
-        {
-            isTerrain = true;
-        }
+        state.SetStateCollisionTerrain(true);
     }
     private void OnCollisionExit(Collision collision) 
     {
-        if (collision.gameObject.tag == "Terrain") 
-        {
-            isTerrain = false;
-        }
+        state.SetStateCollisionTerrain(false);
     }
 }
 
