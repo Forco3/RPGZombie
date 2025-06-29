@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MoveChar : MonoBehaviour
 {
-    private StateCharacter state;
+    private CharacterState state;
     private CameraCharacter cameraChar; 
 
     private Rigidbody rbPerson;
@@ -19,7 +19,7 @@ public class MoveChar : MonoBehaviour
     public float currentSpeed; 
     private void Awake()
     {
-        state = GetComponent<StateCharacter>();
+        state = GetComponent<CharacterState>();
         rbPerson = GetComponent<Rigidbody>();
         cameraChar = FindObjectOfType<CameraCharacter>(); 
     }
@@ -55,7 +55,7 @@ public class MoveChar : MonoBehaviour
     }
     private void Jumping(bool isKeyDownJump)
     {
-        if (isKeyDownJump && state.isCollisitonTerrain) 
+        if (isKeyDownJump) 
         {
             rbPerson.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); 
         } 

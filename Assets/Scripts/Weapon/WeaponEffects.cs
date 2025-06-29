@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WeaponEffects : MonoBehaviour
 {
-    private StateCharacter state;
+    private CharacterState state;
 
     private AudioSource weaponSource;
     [Header("Audio and ParticleEffects")]
@@ -14,7 +14,7 @@ public class WeaponEffects : MonoBehaviour
     private void Awake()
     {
         weaponSource = GetComponent<AudioSource>();
-        state = FindObjectOfType<StateCharacter>();
+        state = FindObjectOfType<CharacterState>();
     }
     private void Update()
     {

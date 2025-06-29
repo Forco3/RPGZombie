@@ -1,18 +1,21 @@
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
-[RequireComponent(typeof(StateCharacter))]
+[RequireComponent(typeof(CharacterState))]
 public class CharacterRigIK : MonoBehaviour
 {
-    private StateCharacter state;
+    private CharacterState state;
 
     public Rig weaponSlotSpineWeight;
     public Rig weaponSlotReadyForBattle;
     public Rig weaponSlotAimWeight; 
+    public Rig handsOnWeaponWeight;
+    public Rig handsAimOnWeaponWeight;
+    public Rig bodyLookTargetAimWeight; 
    
     private void Awake()
     {
-        state = GetComponentInChildren<StateCharacter>();
+        state = GetComponentInChildren<CharacterState>();
     }
     private void Update()
     { 
@@ -30,6 +33,7 @@ public class CharacterRigIK : MonoBehaviour
         if (isHasWeapon)
         {
             weaponSlotReadyForBattle.weight = isReadyForBattle ? 1 : 0;
+            handsOnWeaponWeight.weight = isReadyForBattle ? 1 : 0;
         }   
     }
   
@@ -38,6 +42,8 @@ public class CharacterRigIK : MonoBehaviour
         if (isHasWeapon && isReadyForBattle)
         {
             weaponSlotAimWeight.weight = isAimWeapon ? 1 : 0;
+            bodyLookTargetAimWeight.weight = isAimWeapon ? 1 : 0;
+            handsAimOnWeaponWeight.weight = isAimWeapon ? 1 : 0;
         }
     }
 }

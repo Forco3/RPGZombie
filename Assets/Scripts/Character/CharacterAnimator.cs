@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CharacterAnimator : MonoBehaviour
 {
-    private StateCharacter state;
+    private CharacterState state;
     private Animator animator;
      
     private float speedAnim = 0.5f;
@@ -10,12 +10,11 @@ public class CharacterAnimator : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        state = FindObjectOfType<StateCharacter>();
+        state = FindObjectOfType<CharacterState>();
     }
     private void Update()
     {
-        bool isJump = state.isCollisitonTerrain && state.isKeyDownJump;
-        JumpAnim(isJump);
+        JumpAnim(state.isKeyDownJump);
     }
     private void FixedUpdate()
     {

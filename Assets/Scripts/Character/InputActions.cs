@@ -1,15 +1,15 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(StateCharacter))]
+[RequireComponent(typeof(CharacterState))]
 public class InputActions : MonoBehaviour
 {
-    private StateCharacter state;
+    private CharacterState state;
     public event Func<bool> onRaycastHitPickUpItem;
     public event Func<bool> onRaycastHitEnemy;
     public void Awake()
     {
-        state = GetComponent<StateCharacter>();
+        state = GetComponent<CharacterState>();
     }
 
     private void Update()

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StateCharacter : MonoBehaviour
+public class CharacterState : MonoBehaviour
 {  
     public bool isHasWeapon { get; private set; } //свойства должны быть публичными
     public bool isReadyForBattle { get; private set; }
@@ -45,7 +45,7 @@ public class StateCharacter : MonoBehaviour
         if(isAiming)
             this.isFire = isFire;
     }
-    public void SetStateJump( bool isKeyDown)
+    public void SetStateJump(bool isKeyDown)
     {
         if(isCollisitonTerrain)
             isKeyDownJump = isKeyDown;
