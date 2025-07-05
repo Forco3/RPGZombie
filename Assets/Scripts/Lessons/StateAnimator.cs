@@ -4,45 +4,40 @@ using UnityEngine;
 
 public class StateAnimator : StateMachineBehaviour
 {
-    
+    private CharacterState charState;
+    private void Awake()
+    {
+        charState = FindObjectOfType<CharacterState>();
+    }
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        if (layerIndex == 1)
+        {
+            StartAnimEquip(stateInfo, true);
+            StartAnimUnEquip(stateInfo, true);
+        }
     }
-
-   
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-
-    }
-
-    
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        if (layerIndex == 1)
+        {
+            StartAnimEquip(stateInfo, false);
+            StartAnimUnEquip(stateInfo, false);
+        }
     }
-
-    
-    override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public void StartAnimEquip(AnimatorStateInfo stateInfo, bool isStart)
     {
-
+        if (stateInfo.IsName("Rifle Pull Out"))
+        {
+            charState.SetEquipingWeaponAnimationState(isStart);
+        }
     }
-
-    
-    override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public void StartAnimUnEquip(AnimatorStateInfo stateInfo, bool isStart)
     {
-
-    }
-
-    
-    override public void OnStateMachineEnter(Animator animator, int stateMachinePathHash)
-    {
-
-    }
-
-    
-    override public void OnStateMachineExit(Animator animator, int stateMachinePathHash)
-    {
-
+        if (stateInfo.IsName("Rifle Put Away"))
+        {
+            charState.SetEquipingWeaponAnimationState(isStart);
+        }
     }
 }

@@ -6,11 +6,11 @@ public class CharacterState : MonoBehaviour
     public bool isReadyForBattle { get; private set; }
     public bool isAiming { get; private set; }
     public bool isFire { get; private set; }
-
-
     public bool isCrouchimg { get; private set; }
     public bool isKeyDownJump { get; private set; }
     public bool isCollisitonTerrain { get; private set; } 
+    public bool isEquipingWeaponAnimationState {  get; private set; }
+    public bool isWeaponInHand {  get; private set; }
     public Vector3 inputAxis { get; private set; }
 
     public bool isRaycastHitEnemy { get; private set; }
@@ -57,5 +57,13 @@ public class CharacterState : MonoBehaviour
     public void SetRaycastHitEnemyState(bool isRaycastHit)
     {
         isRaycastHitEnemy = isRaycastHit;
+    }
+    public void SetEquipingWeaponAnimationState(bool isEquip)
+    {
+        isEquipingWeaponAnimationState = isEquip;
+    }
+    public void SetWeaponInHand(bool inHand)
+    {
+        isWeaponInHand = inHand;
     }
 }

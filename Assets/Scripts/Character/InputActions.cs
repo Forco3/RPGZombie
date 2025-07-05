@@ -7,6 +7,7 @@ public class InputActions : MonoBehaviour
     private CharacterState state;
     public event Func<bool> onRaycastHitPickUpItem;
     public event Func<bool> onRaycastHitEnemy;
+    public event Action<bool> onEquipWeapon;
     public void Awake()
     {
         state = GetComponent<CharacterState>();
@@ -42,6 +43,8 @@ public class InputActions : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
+            state.SetWeaponInHand(!state.isWeaponInHand);
+            onEquipWeapon?.Invoke(state.isWeaponInHand);
             state.SetStateReadyForBattle();
         }
     }

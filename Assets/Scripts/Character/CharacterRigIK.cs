@@ -22,6 +22,7 @@ public class CharacterRigIK : MonoBehaviour
         WeaponSlotSpine(state.isHasWeapon);
         WeaponSlotReadyForBattle(state.isHasWeapon, state.isReadyForBattle);
         WeaponSlotAim(state.isHasWeapon, state.isReadyForBattle, state.isAiming);
+        WeightIKWeapon(state.isEquipingWeaponAnimationState);
     }
     private void WeaponSlotSpine(bool isHasWeapon)
     {
@@ -44,6 +45,18 @@ public class CharacterRigIK : MonoBehaviour
             weaponSlotAimWeight.weight = isAimWeapon ? 1 : 0;
             bodyLookTargetAimWeight.weight = isAimWeapon ? 1 : 0;
             handsAimOnWeaponWeight.weight = isAimWeapon ? 1 : 0;
+        }
+    }
+    public void WeightIKWeapon(bool isEquip)
+    {
+        if (isEquip)
+        {
+            weaponSlotSpineWeight.weight = 0;
+            weaponSlotReadyForBattle.weight = 0;
+            weaponSlotAimWeight.weight = 0;
+            handsOnWeaponWeight.weight = 0;
+            handsAimOnWeaponWeight.weight = 0;
+            bodyLookTargetAimWeight.weight = 0;
         }
     }
 }

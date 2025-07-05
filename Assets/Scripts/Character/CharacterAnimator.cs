@@ -4,13 +4,26 @@ public class CharacterAnimator : MonoBehaviour
 {
     private CharacterState state;
     private Animator animator;
+    private InputActions action;
      
     private float speedAnim = 0.5f;
     public float smoothToggleAnim = 0.2f;
+
+    private int equipWeaponLayer = 1;
     private void Awake()
     {
         animator = GetComponent<Animator>();
         state = FindObjectOfType<CharacterState>();
+        action = GetComponent<InputActions>();
+        equipWeaponLayer = animator.GetLayerIndex("Weapon Equip");
+    }
+    private void OnEnable()
+    {
+        action.onEquipWeapon += WeaponEquipAnim;
+    }
+    private void OnDisable()
+    {
+        action.onEquipWeapon -= WeaponEquipAnim;
     }
     private void Update()
     {
@@ -69,5 +82,14 @@ public class CharacterAnimator : MonoBehaviour
         {
             animator.SetFloat("MouseDelta", 0, smoothToggleAnim, Time.deltaTime);
         }
+    }
+    private void WeaponEquipAnim(bool isEquip)
+    {
+        animator.SetLayerWeight(equipWeaponLayer, 1);
+        if (isEquip)
+        {
+            animator.SetTrigger("WeaponEquipTrigger");
+        }
+        else animator.SetTrigger("WeaponUnEquipTrigger");
     }
 }
