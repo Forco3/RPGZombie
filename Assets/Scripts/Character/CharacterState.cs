@@ -1,7 +1,11 @@
 using UnityEngine;
+using System;
 
 public class CharacterState : MonoBehaviour
-{  
+{
+    public event Action OnSetParentWeapon;
+    public event Action OnResetParenWeapon;
+
     public bool isHasWeapon { get; private set; } //свойства должны быть публичными
     public bool isReadyForBattle { get; private set; }
     public bool isAiming { get; private set; }
@@ -61,6 +65,8 @@ public class CharacterState : MonoBehaviour
     public void SetEquipingWeaponAnimationState(bool isEquip)
     {
         isEquipingWeaponAnimationState = isEquip;
+        if (isEquip) OnSetParentWeapon?.Invoke();
+        else OnResetParenWeapon?.Invoke();
     }
     public void SetWeaponInHand(bool inHand)
     {

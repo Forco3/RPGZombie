@@ -16,7 +16,7 @@ public class WeaponHan : MonoBehaviour
             gameObject.transform.localPosition = Vector3.zero;
             gameObject.transform.localRotation = Quaternion.identity;
             gameObject.GetComponent<Collider>().enabled = false;
-            gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            gameObject.GetComponent<Rigidbody>().isKinematic = true; 
             return true;
         }
         else
